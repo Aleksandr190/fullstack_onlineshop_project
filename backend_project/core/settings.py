@@ -24,12 +24,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&do#z232!-ozo4p4!6*pa4iou=%b=u(9i38_8o7mcz7_ud##%2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+# ✏️ ИЗМЕНЕНО: Теперь DEBUG динамически считывается из Docker (False для продакшена)
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
+ALLOWED_HOSTS = [
+    '130.49.128.168',  # IP вашего сервера
+    'localhost',
+    '127.0.0.1',
+]
 
-# Application definition
+# ✏️ ИЗМЕНЕНО: Убрано условие if not DEBUG. Доверенный origin для CSRF должен быть всегда,
+# чтобы админка не блокировала отправку форм (вход, сохранение товаров) через Nginx
+CSRF_TRUSTED_ORIGINS = [
+    "http://130.49.128.168",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
