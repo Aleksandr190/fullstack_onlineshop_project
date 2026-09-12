@@ -11,7 +11,7 @@ const [settings, setSettings] = useState({ site_name: 'Загрузка...', pho
   const fetchSettings = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://127.0.0.1:8000/api/settings/');
+      const response = await axios.get('/api/settings/');
       setSettings(response.data); // У axios данные лежат в .data
       setError(null);
     } catch (err) {

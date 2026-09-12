@@ -15,7 +15,7 @@ export const CatalogPage = () => {
     try {
       setLoading(true);
       // Укажите адрес, на котором запущен ваш Django (по умолчанию 8000 порт)
-      const response = await axios.get('http://127.0.0.1:8000/api/products/');
+      const response = await axios.get('/api/products/');
       
       // Записываем полученный массив товаров в состояние
       setProducts(response.data);
